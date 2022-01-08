@@ -27,8 +27,6 @@ In Docker repo folder, copy `.env.example` to `.env` and edit it accordingly:
 
 * `COMPOSE_CONVERT_WINDOWS_PATHS=1`  
   Uncomment this line on Windows OS. That will tell Docker to interconvert unix/win paths.
-* `FRONTEND_DIR`  
-  Absolute or relative path to the folder with cloned frontend repo.
 * `LISTEN_IP`  
   IP address to listen incoming HTTP connections. If you already have `nginx` listening on `127.0.0.1:80` port then you
   can bind docker containers to listen on another IP (default `127.0.0.2`).  
@@ -64,7 +62,7 @@ When it's done you're ready to run containers:
 docker-compose up -d
 ```
 
-First run could take some time, because frontend/backend will install needed dependencies. WAIT 10 MINUTES after
+First run could take some time, because vue app will install needed dependencies. WAIT 10 MINUTES after
 executing docker-compose up -d for the first time.
 
 To start/stop containers you can use `docker-compose stop` and `docker-compose start`.  
