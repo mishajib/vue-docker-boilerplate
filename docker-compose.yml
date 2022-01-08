@@ -1,0 +1,45 @@
+version: '3'
+services:
+
+  # Nginx
+  vue-nginx:
+    image: nginx:alpine
+    container_name: vue-nginx
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_TAGS: docker
+      SERVICE_NAME: nginx
+    ports:
+      - "${LISTEN_IP}:80:80"
+    depends_on:
+      - vue-frontend
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
+    networks:
+      - vue-network
+
+  # Vue-cli with frontend
+  vue-frontend:
+    container_name: vue-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - "./:/app"
+    environment:
+      SERVICE_NAME: frontend
+      SERVICE_TAGS: docker
+      NODE_ENV: development
+    networks:
+      - vue-network
+
+# networks
+networks:
+  vue-network:
+    name: vue-network
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "${LISTEN_IP}"
