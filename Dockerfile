@@ -1,10 +1,6 @@
 FROM node:lts-alpine
 
-#RUN npm -g i @vue/cli
-
-#WORKDIR /app
-#
-#RUN npm i
+WORKDIR /app
 
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
